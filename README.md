@@ -10,5 +10,9 @@ Use the following credentials to connect:
 ssh linaro@<Moorebot_IP>
 # Password: linaro
 ```
-Get root access to the scout
+Get root access to the scout by adding "chmod 4755 /usr/bin/sudo" before the exit 0 line in the "/etc/rc.local" file.
+
+```bash
+vim /etc/rc.local
+```
 
