@@ -2,7 +2,7 @@
 
 This guide explains how to set up the Scout robot
 
-## First SSH into the device
+## First SSH into the Moorebot and gaining Root Access
 
 Use the following credentials to connect:
 
@@ -20,3 +20,6 @@ to ennter into the file and then edit the file by pressing "i" and add "chmod 47
 ```bash
 :wq!
 ```
+Reboot the scout by either typing reboot on the terminal or powercycle and now there is root access on the scout. 
+
+## Second get MQTT Running
