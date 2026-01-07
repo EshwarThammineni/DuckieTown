@@ -10,4 +10,5 @@ Use the following credentials to connect:
 ssh linaro@<Moorebot_IP>
 # Password: linaro
 ```
-sa
+Get root access to the scout
+
