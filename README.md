@@ -37,3 +37,11 @@ Create a new directory called scout-files and all of the scripts will be placed 
 mkdir scout-files
 cd scout-files/
 ```
+
+Install the paho-mqtt library for the scout-file directory (remember to connect the scout to wifi via app):
+
+```bash
+wget https://files.pythonhosted.org/packages/32/d3/6dcb8fd14746fcde6a556f932b5de8bea8fedcb85b3a092e0e986372c0e7/paho-mqtt-1.5.1.tar.gz
+tar -xvf paho-mqtt-1.5.1.tar.gz
+```
+Add mqtt_client.py and run_mqtt.sh into /root/scout-files
