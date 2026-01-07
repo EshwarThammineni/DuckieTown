@@ -9,4 +9,5 @@ Use the following credentials to connect:
 ```bash
 ssh linaro@<Moorebot_IP>
 # Password: linaro
-
+```
+sa
