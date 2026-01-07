@@ -51,3 +51,19 @@ sudo apt install python3-pip
 sudo pip3 install rospkg
 ```
 Add mqtt_client.py and run_mqtt.sh into /root/scout-files
+Add the mqtt_client.service into /etc/systemd/system:
+
+```bash
+cd etc/systemd/system
+sudo vim mqtt_client.service
+```
+Start the service and check its status:
+
+```bash
+sudo systemctl start mqtt_client.service
+sudo systemctl daemon-reload
+sudo systemctl restart mqtt_client.service
+sudo systemctl status mqtt_client.service
+```
+It should say active (running) and you should see messages from the camera. 
+
