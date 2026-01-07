@@ -51,14 +51,19 @@ class MqttClient:
     def transport_handler(self, msg): 
         pass
 
-    def velocities_handler(self, msg): 
-        msg_client_id, cmd_vel = msg.split('::') 
-        if self._name in msg_client_id: 
-            lx, ly, az = cmd_vel.split('\n')
-            lx = float(lx.strip()) / 2
-            ly = float(ly.strip()) 
-            az = float(az.strip()) 
-            self._cmd_vel_pub.publish(Twist(Vector3(ly, lx, 0), Vector3(0, 0, az)))
+    def velocities_handler(self, msg):
+        try:
+            msg_client_id, cmd_vel = msg.split('::')
+            if self._name in msg_client_id:
+                lx, ly, az = cmd_vel.split('\n')
+                lx = float(lx.strip()) / 2
+                ly = float(ly.strip())
+                az = float(az.strip())
+                twist_msg = Twist(Vector3(ly, lx, 0), Vector3(0, 0, az))
+                self._cmd_vel_pub.publish(twist_msg)
+                print("[VEL] Sent cmd_vel: lx={}, ly={}, az={}".format(lx, ly, az))
+        except Exception as e:
+            print("Error" + str(e))
 
     def image_callback(self, data):
         # Convert the ROS Image message to a byte array
