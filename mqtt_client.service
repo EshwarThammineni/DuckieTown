@@ -4,7 +4,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/bin/bash -c 'source /opt/ros/melodic/local_setup.bash && exec python3 /root/scout-files/run_mqtt.sh'
+ExecStart=/bin/bash -c 'source /opt/ros/melodic/local_setup.bash && exec /root/scout-files/run_mqtt.sh'
 WorkingDirectory=/root/scout-files
 Restart=always
 RestartSec=2
