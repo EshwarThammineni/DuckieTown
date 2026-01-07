@@ -65,5 +65,6 @@ sudo systemctl daemon-reload
 sudo systemctl restart mqtt_client.service
 sudo systemctl status mqtt_client.service
 ```
-It should say active (running) and you should see messages from the camera. 
+It should say active (running) and you should see messages. 
+On another machine you should be able to send messages via mqtt. The move.py code assuming mosquitto and the environment is set up correctly will cause the moorebot to move. 
 
