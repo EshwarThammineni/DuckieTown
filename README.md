@@ -23,3 +23,16 @@ to ennter into the file and then edit the file by pressing "i" and add "chmod 47
 Reboot the scout by either typing reboot on the terminal or powercycle and now there is root access on the scout. 
 
 ## Second get MQTT Running
+
+Once you ssh and gain root access, switch to a root user by 
+
+```bash
+sudo su -
+```
+This puts you into the root-level userspace. 
+
+Create a new directory called scout-files: 
+
+```bash
+mkdir scout-files
+```
