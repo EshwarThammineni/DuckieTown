@@ -15,4 +15,8 @@ Get root access to the scout by adding "chmod 4755 /usr/bin/sudo" before the exi
 ```bash
 vim /etc/rc.local
 ```
+to ennter into the file and then edit the file by pressing "i" and add "chmod 4755 /usr/bin/sudo" before the first line. Press esc to exit out of edit mode and do
 
+```bash
+:wq!
+```
