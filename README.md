@@ -31,8 +31,9 @@ sudo su -
 ```
 This puts you into the root-level userspace. 
 
-Create a new directory called scout-files: 
+Create a new directory called scout-files and all of the scripts will be placed in here: 
 
 ```bash
 mkdir scout-files
+cd scout-files/
 ```
