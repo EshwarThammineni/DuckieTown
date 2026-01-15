@@ -59,7 +59,7 @@ class MqttClient:
                 lx = float(lx.strip()) / 2
                 ly = float(ly.strip())
                 az = float(az.strip())
-                twist_msg = Twist(Vector3(ly, lx, 0), Vector3(0, 0, az))
+                twist_msg = Twist(Vector3(lx, ly, 0), Vector3(0, 0, az))
                 self._cmd_vel_pub.publish(twist_msg)
                 print("[VEL] Sent cmd_vel: lx={}, ly={}, az={}".format(lx, ly, az))
         except Exception as e:
