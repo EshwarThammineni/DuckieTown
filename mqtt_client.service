@@ -1,14 +1,13 @@
 [Unit]
-Description=MQTT Client Autostart 
-After=network-online.target 
-Wants=network-online.target
+Description=MQTT Client Autostart
+After=network.target
 
 [Service]
-ExecStart=/bin/bash -c 'source /opt/ros/melodic/local_setup.bash && exec /root/scout-files/run_mqtt.sh'
-WorkingDirectory=/root/scout-files
+Type=simple
+ExecStart=/root/scout-files/run_mqtt.sh
 Restart=always
-RestartSec=2
 User=root
+Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
