@@ -1,22 +1,42 @@
-import rospy
-from roller_eye.msg import frame
-import numpy as np
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge, CvBridgeError
 import cv2
 
-def callback(msg):
-    np_arr = np.frombuffer(msg.data, np.uint8)
-    img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+class CameraSubscriber(Node):
+    def __init__(self):
+        super().__init__('camera_subscriber')
 
-    if img is not None:
-        cv2.imshow("Moorebot Camera", img)
-        cv2.waitKey(1)
+        #camera topic for us was "/duckiescrooge/camera/image"
+        
+        self.sub = self.create_subscription(
+            Image,
+            '/duckiescrooge/camera/image',
+            self.image_callback,
+            10
+        )
+        self.bridge = CvBridge()
+        self.get_logger().info("Camera subscriber started.")
+    def image_callback(self, msg):
+        try:
+            # Convert ROS Image to OpenCV image (BGR format)
+            cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
+        except CvBridgeError as e:
+            self.get_logger().error(f"CV Bridge error: {e}")
+            return
+        # Display the image in a window
+        cv2.imshow("DuckieDonald Camera", cv_image)
+        cv2.waitKey(1) 
 
-def cleanup():
-    cv2.destroyAllWindows()
-    print("OpenCV windows closed.")
-
-rospy.init_node("moorebot_camera_viewer")
-rospy.Subscriber("/CoreNode/jpg", frame, callback)
-rospy.on_shutdown(cleanup)  # <-- ensures cleanup runs on Ctrl+C
-rospy.loginfo("Subscribed to /CoreNode/jpg... displaying video")
-rospy.spin()
+def main(args=None):
+    rclpy.init(args=args)
+    node = CameraSubscriber()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        cv2.destroyAllWindows()
+        node.destroy_node()
+        rclpy.shutdown()
