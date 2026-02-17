@@ -16,14 +16,14 @@ class MoorebotLaneFollower(Node):
         self.bridge = CvBridge()
         self.latest_image = None
         #april tag
-        self.apriltag_stop = AprilTagStopController(stop_tag_id=162, stop_time=3.0)
+        self.apriltag_stop = AprilTagStopController(stop_tag_id=25, stop_time=3.0)
         self.subscription = self.create_subscription(
             Image,
-            '/duckiescrooge/camera/image',
+            '/duckiedonald/camera/image',
             self.image_callback,
             10
         )
-        self.cmd_pub = self.create_publisher(Twist, '/duckiescrooge/cmd_vel', 10)
+        self.cmd_pub = self.create_publisher(Twist, '/duckiedonald/cmd_vel', 10)
 
         # (0.02 = approx 50 hz)
         self.timer = self.create_timer(0.02, self.process_image)
@@ -189,9 +189,8 @@ class MoorebotLaneFollower(Node):
         cv2.namedWindow("Yellow Mask", cv2.WINDOW_NORMAL)
         cv2.resizeWindow("Yellow Mask", 600, 600)
 
-       # cv2.imshow("Lane Debug", debug)
+        cv2.imshow("Lane Debug", debug)
         cv2.imshow("Full Frame (Tags)", full_debug)
-        cv2.imshow("Lane ROI", debug)
 
         cv2.imshow("White Mask", white_mask)
         cv2.imshow("Yellow Mask", yellow_mask)
@@ -249,6 +248,3 @@ def main():
     node.destroy_node()
     cv2.destroyAllWindows()
     rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
